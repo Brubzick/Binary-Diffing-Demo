@@ -1,5 +1,7 @@
 # Find the longest path in a CFG
-# dpsNode that can store its last node in the current path
+# use deep first search method, avoid loop
+
+# dpsNode that can store its previous node in the current path
 class dpsNode:
     node = None
     pre = None
@@ -23,6 +25,7 @@ def FindLongest(cfg):
     cPathLeaf = None # the leaf of current path
     maxStep = 0
     stack.append(dpsNode(head, None, 0))
+    count = 0
 
     while (stack):
         cNode = stack.pop()
@@ -35,9 +38,13 @@ def FindLongest(cfg):
                 for node in tNode.successors:
                     stack.append(dpsNode(node, cNode, cNode.cStep+1))
             else:
+                count += 1
                 if (cNode.cStep > maxStep):
                     maxStep = cNode.cStep
                     lNode = cNode
+                if (count >= 1000000):
+                    print('too many pathes, use the current longest path.')
+                    break
 
     # get longest path
     lPath = []

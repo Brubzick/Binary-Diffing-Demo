@@ -1,3 +1,3 @@
 
 def CG(cfg):
-    return cfg.functions.callgraph
+    return cfg.kb.callgraph

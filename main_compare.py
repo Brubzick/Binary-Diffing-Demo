@@ -19,6 +19,9 @@ def Compare(proj1, proj2):
     refPathNode = [] # CFG node
     for node in refPath:
         refPathNode.append(node.node)
+    
+    print(path)
+    print(refPathNode)
 
     # find matching node
     matchingList = []

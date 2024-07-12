@@ -1,14 +1,11 @@
-# get instructions as a string list, entry node at head
+# get instructions (capstone_insn), entry node at head
 def GetIns(cfg):
     
-    nodeList = list(cfg.nodes())
-
     insList = []
 
-    for node in nodeList:
+    for node in cfg.nodes():
         if (not node.is_simprocedure):
-            l = node.block.instructions
-            for i in range(0, l):
-                insList.append(str(node.block.capstone.insns[i]))
+            for insn in node.block.insns:
+                insList.append(insn)
 
     return insList

@@ -44,7 +44,9 @@ def NeighborEx(matchinglist):
     q = PriorityQueue()
     index = 0 # secondary priority number
     for pair in matchinglist:
-        q.put((1/BlockCompare(pair[0],pair[1]),index,pair))
+        score = BlockCompare(pair[0],pair[1])
+        if (score != 0):
+            q.put((1/score,index,pair))
         index += 1
     # start neighbor explore
     while (not q.empty()):
