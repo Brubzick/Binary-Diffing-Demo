@@ -20,8 +20,6 @@ def Compare(proj1, proj2):
     for node in refPath:
         refPathNode.append(node.node)
     
-    print(path)
-    print(refPathNode)
 
     # find matching node
     matchingList = []
