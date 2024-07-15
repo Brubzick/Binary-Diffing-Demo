@@ -1,16 +1,20 @@
 import angr
-import pyvex
 from features.find_longest_path import FindLongest
 from features.ins_normalization import InsNorm
 from main_compare import Compare
+from features.IRExpression import IRS
 
-proj = angr.Project('./angr_ctf/dist/09_angr_hooks', auto_load_libs = False)
+proj = angr.Project('./angr_ctf/dist/00_angr_find', auto_load_libs = False)
 
 cfg = proj.analyses.CFGFast(normalize=True)
-cg = cfg.kb.callgraph
 
-edge1 = list(cg.edges)[0]
-a,b,c = edge1
+count = 0
 
-print(cfg.get_any_node(a))
-print(cfg.get_any_node(b))
+
+# for node in cfg.nodes():
+#     count += 1
+#     if (not node.is_simprocedure):
+#         for ins in IRS(node.block):
+#             print(ins)
+#     if count >= 3:
+#         break

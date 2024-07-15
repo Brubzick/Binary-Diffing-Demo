@@ -2,6 +2,7 @@ from compare1 import BlockCompare
 import numpy as np
 from scipy.optimize import linear_sum_assignment
 from queue import PriorityQueue
+import compare2
 
 def IfSameSuc(node1, node2):
     if(len(node1.successors) == len(node2.successors)):
@@ -23,7 +24,7 @@ def NeighborMapping(neighborhood1, neighborhood2):
         H = [[0]*l]*l
         for i in range(0,l):
             for j in range(0,l):
-                score = BlockCompare(neighborhood1[i], neighborhood2[j])
+                score = compare2.BlockCompare(neighborhood1[i], neighborhood2[j])
                 if (score == 0):
                     H[i][j] = 1000
                 else:
@@ -44,7 +45,7 @@ def NeighborEx(matchinglist):
     q = PriorityQueue()
     index = 0 # secondary priority number
     for pair in matchinglist:
-        score = BlockCompare(pair[0],pair[1])
+        score = compare2.BlockCompare(pair[0],pair[1])
         if (score != 0):
             q.put((1/score,index,pair))
         index += 1

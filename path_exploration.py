@@ -1,5 +1,6 @@
 from compare1 import BlockCompare
 from queue import Queue
+import compare2
 
 # path exploration / get cfg score table
 # Define Score and GNode to store the previous node in the path
@@ -56,7 +57,7 @@ def PathExplore(cfg, path):
             (len(cNode.predecessors) == len(path[col_num-1].predecessors)) & 
             (len(cNode.successors) == len(path[col_num-1].successors))
             ):
-                simScore = BlockCompare(cNode, path[col_num-1])
+                simScore = compare2.BlockCompare(cNode, path[col_num-1])
             score = max(gTable[row_num-1][col_num].score, gTable[row_num][col_num-1].score, gTable[row_num-1][col_num-1].score+simScore)
             gTable[row_num][col_num] = Score(gNode, gNode.pre, score)
 

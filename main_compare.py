@@ -3,6 +3,7 @@ from compare1 import BlockCompare
 from neighborhood_explore import NeighborEx, IfConflict
 from features.find_longest_path import FindLongest
 from features.reference_path import getRefPath
+import compare2
 
 def Compare(proj1, proj2):
     cfg1 = proj1.analyses.CFGFast(normalize=True) # reference
@@ -38,7 +39,6 @@ def Compare(proj1, proj2):
 
     finalScore = 0
     for i in range(0, len(matchingList)):
-        finalScore += BlockCompare(matchingList[i][0], matchingList[i][1])
+        finalScore += compare2.BlockCompare(matchingList[i][0], matchingList[i][1])
 
     return finalScore
-

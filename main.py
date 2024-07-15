@@ -3,8 +3,8 @@ from main_compare import Compare
 
 def main():
     # proj1 is refrence, proj2 is comparing target 
-    proj1 = angr.Project("./angr_ctf/dist/00_angr_find", auto_load_libs = False)
-    proj2 = angr.Project("./angr_ctf/dist/03_angr_symbolic_registers", auto_load_libs = False)
+    proj1 = angr.Project("./angr_ctf/dist/05_angr_symbolic_memory", auto_load_libs = False)
+    proj2 = angr.Project("./angr_ctf/dist/06_angr_symbolic_dynamic_memory", auto_load_libs = False)
 
     compareScore = Compare(proj1,proj2)
     print('compare score done')
