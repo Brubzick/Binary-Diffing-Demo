@@ -38,7 +38,7 @@ def Compare(proj1, proj2):
 
     finalScore = 0
     for i in range(0, len(matchingList)):
-        finalScore += compare2.BlockCompare(matchingList[i][0], matchingList[i][1])
+        finalScore += BlockCompare(matchingList[i][0], matchingList[i][1])
 
     return finalScore
 
