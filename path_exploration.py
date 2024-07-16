@@ -62,7 +62,7 @@ def PathExplore(cfg, path):
             gTable[row_num][col_num] = Score(gNode, gNode.pre, score)
 
         cNodeIndex = nodeList.index(cNode)
-        if (hScore[cNodeIndex] < score):
+        if ((hScore[cNodeIndex] < score) | (hScore[cNodeIndex] == 0)):
             hScore[cNodeIndex] = score
             for i in range(0, len(cNode.successors)):
                 gNode_t = GNode(cNode.successors[i],gNode, 0)

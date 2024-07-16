@@ -1,5 +1,4 @@
 # get reference path from similarity table in compare 1 method
-# the node in the path is a customize class GNode but not CFGNode
 def getRefPath(simTable):
     l1 = len(simTable)-1
     l2 = len(simTable[0])-1
@@ -12,8 +11,8 @@ def getRefPath(simTable):
     refPath = []
     nodeTrace = highest.gnode
     while (nodeTrace):
-        refPath.append(nodeTrace)
+        refPath.append(nodeTrace.node)
         nodeTrace = nodeTrace.pre
     
-    refPath.reverse() # reference path (gNode)
+    refPath.reverse() # reference path
     return refPath
