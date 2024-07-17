@@ -1,5 +1,5 @@
 import angr
-from main_compare import Compare, Compare2
+from main_compare import Compare
 
 def main():
     # proj1 is refrence, proj2 is comparing target 

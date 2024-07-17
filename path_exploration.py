@@ -53,11 +53,9 @@ def PathExplore(cfg, path):
 
         for col_num in range(1, pLength+1):
             simScore = 0
-            if (
-            (len(cNode.predecessors) == len(path[col_num-1].predecessors)) & 
-            (len(cNode.successors) == len(path[col_num-1].successors))
-            ):
-                simScore = BlockCompare(cNode, path[col_num-1])
+            if ((len(cNode.predecessors) == len(path[col_num-1].predecessors)) & (len(cNode.successors) == len(path[col_num-1].successors))):
+                simScore = compare2.BlockCompare(cNode, path[col_num-1])
+
             score = max(gTable[row_num-1][col_num].score, gTable[row_num][col_num-1].score, gTable[row_num-1][col_num-1].score+simScore)
             gTable[row_num][col_num] = Score(gNode, gNode.pre, score)
 

@@ -1,18 +1,17 @@
 
-def IRS(block):
-    IRList = block.vex.statements
-    IRInsnList = []
+def IRExpression(block):
+    IRStatements = block.vex.statements
+    insns = []
     insn = []
-    
-    for IRStatement in IRList:
-        statement = IRStatement.pp_str()
-        if (statement[0] == '-'):
-            if (insn != []):
-                IRInsnList.append(insn)
-            insn = []
-        else:
-            insn.append(statement)
-    if (insn != []):
-        IRInsnList.append(insn)
 
-    return IRInsnList
+    for IRStmt in IRStatements:
+        tag = IRStmt.tag
+        if ((tag == 'Ist_IMark')):
+            if (insn != []):
+                insns.append(insn)
+            insn = []
+        insn.append(tag)
+    if (insn != []):
+        insns.append(insn)
+    
+    return insns
