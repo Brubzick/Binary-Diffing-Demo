@@ -5,7 +5,7 @@ def GetIns(cfg):
 
     for node in cfg.nodes():
         if (not node.is_simprocedure):
-            for insn in node.block.insns:
+            for insn in node.block.capstone.insns:
                 insList.append(insn)
 
     return insList

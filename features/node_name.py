@@ -1,7 +1,7 @@
 
 def HandleNodeName(name):
-    if (name == None):
-        return None
+    if ((name == None) | (name == '')):
+        return name
     elif ((name[0] == '_') | (name.isalpha())):
         return name
     else:

@@ -25,10 +25,7 @@ def NeighborMapping(neighborhood1, neighborhood2):
         for i in range(0,l):
             for j in range(0,l):
                 score = compare2.BlockCompare(neighborhood1[i], neighborhood2[j])
-                if (score == 0):
-                    H[i][j] = 1000
-                else:
-                    H[i][j] = 1/score
+                H[i][j] = -score
         sim = np.asarray(H)
         comb = linear_sum_assignment(sim)
 
@@ -49,9 +46,8 @@ def NeighborEx(matchinglist):
     layer = 0
     for pair in matchinglist:
         score = compare2.BlockCompare(pair[0],pair[1])
-        if (score != 0):
-            q.put((1/score,index,pair))
-            index += 1
+        q.put((-score,index,pair))
+        index += 1
     # start neighbor explore
     while (not q.empty()):
         pair = q.get()[2]
@@ -64,9 +60,8 @@ def NeighborEx(matchinglist):
             for nodePair in mapping:
                 if (IfSameSuc(nodePair[0], nodePair[1])):
                     score = compare2.BlockCompare(nodePair[0],nodePair[1])
-                    if (score != 0):
-                        qSuc.put((1/score, index, nodePair))
-                        index += 1
+                    qSuc.put((-score, index, nodePair))
+                    index += 1
     
         if (IfSamePre(node1,node2)):
             mapping = NeighborMapping(node1.predecessors, node2.predecessors)
@@ -75,9 +70,8 @@ def NeighborEx(matchinglist):
             for nodePair in mapping:
                 if (IfSamePre(nodePair[0], nodePair[1])):
                     score = compare2.BlockCompare(nodePair[0],nodePair[1])
-                    if (score != 0):
-                        qPre.put((1/score, index, nodePair))
-                        index += 1
+                    qPre.put((-score, index, nodePair))
+                    index += 1
     layer = 0
     while (not qSuc.empty()):
         layer += 1
@@ -93,9 +87,8 @@ def NeighborEx(matchinglist):
             for nodePair in mapping:
                 if (IfSameSuc(nodePair[0], nodePair[1])):
                     score = compare2.BlockCompare(nodePair[0],nodePair[1])
-                    if (score != 0):
-                        qSuc.put((1/score, index, nodePair))
-                        index += 1
+                    qSuc.put((-score, index, nodePair))
+                    index += 1
     layer = 0
     while (not qPre.empty()):
         layer += 1
@@ -112,9 +105,8 @@ def NeighborEx(matchinglist):
             for nodePair in mapping:
                 if (IfSamePre(nodePair[0], nodePair[1])):
                     score = compare2.BlockCompare(nodePair[0],nodePair[1])
-                    if (score != 0):
-                        qPre.put((1/score, index, nodePair))
-                        index += 1
+                    qPre.put((-score, index, nodePair))
+                    index += 1
 
     return new_mapping
 
