@@ -1,8 +1,8 @@
 # Find the longest path in a CFG
 # use deep first search method, avoid loop
 
-# dpsNode that can store its previous node in the current path
-class dpsNode:
+# dfsNode that can store its previous node in the current path
+class dfsNode:
     node = None
     pre = None
     cStep = 0
@@ -21,10 +21,10 @@ def InPath(node, pathNode):
 def FindLongest(cfg):
     head = list(cfg.nodes())[0]
     stack = [] #work stack
-    lNode = None # the leaf dpsNode of the longest path
+    lNode = None # the leaf dfsNode of the longest path
     cPathLeaf = None # the leaf of current path
     maxStep = 0
-    stack.append(dpsNode(head, None, 0))
+    stack.append(dfsNode(head, None, 0))
     count = 0
 
     while (stack):
@@ -36,7 +36,7 @@ def FindLongest(cfg):
             cPathLeaf = cNode
             if (tNode.successors):
                 for node in tNode.successors:
-                    stack.append(dpsNode(node, cNode, cNode.cStep+1))
+                    stack.append(dfsNode(node, cNode, cNode.cStep+1))
             else:
                 count += 1
                 if (cNode.cStep > maxStep):
@@ -52,10 +52,40 @@ def FindLongest(cfg):
         lPath.append(lNode.node)
         lNode = lNode.pre
     lPath.reverse()
-
     return lPath
 
-    
+def TracebackLongest(node, head):
+    stack = []
+    hNode = None
+    cPathHead = None
+    maxStep = 0
+    count = 0
+    stack.append(dfsNode(node, None, 0))
 
+    while(stack):
+        cNode = stack.pop()
+        if (InPath(cNode, cPathHead)):
+            continue
+        else:
+            tNode = cNode.node
+            cPathHead = cNode
+            if ((tNode == head) |(tNode.predecessors == [])):
+                count += 1
+                if (cNode.cStep > maxStep):
+                    maxStep = cNode.cStep
+                    hNode = cNode
+                if (count >= 1000000):
+                    print('too many pathes, use the current longest path.')
+                    break
+            else:
+                for node in tNode.predecessors:
+                    stack.append(dfsNode(node, cNode, cNode.cStep+1))       
+
+    # get longest path
+    lPath = []
+    while (hNode):
+        lPath.append(hNode.node)
+        hNode = hNode.pre
+    return lPath
 
 

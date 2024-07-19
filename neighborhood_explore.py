@@ -42,7 +42,7 @@ def NeighborEx(matchinglist):
     qSuc = PriorityQueue()
     qPre =  PriorityQueue()
     index = 0 # secondary priority number
-    deep_level = 50 # set explore level to avoid dead loop
+    deep_level = 5 # set explore level to avoid dead loop
     layer = 0
     for pair in matchinglist:
         score = compare2.BlockCompare(pair[0],pair[1])

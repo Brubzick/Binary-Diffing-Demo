@@ -1,16 +1,16 @@
 import angr
-from main_compare import Compare
+from main_compare import Compare, Compare2
 
 def main():
     # proj1 is refrence, proj2 is comparing target 
-    proj1 = angr.Project("./angr_ctf/dist/05_angr_symbolic_memory", auto_load_libs = False)
-    proj2 = angr.Project("./angr_ctf/dist/06_angr_symbolic_dynamic_memory", auto_load_libs = False)
+    proj1 = angr.Project("./hello", auto_load_libs = False)
+    proj2 = angr.Project("./shell_sort", auto_load_libs = False)
 
-    compareScore = Compare(proj1,proj2)
+    compareScore = Compare2(proj1,proj2)
     print('compare score done')
-    selfScore1 = Compare(proj1,proj1)
+    selfScore1 = Compare2(proj1,proj1)
     print('self1 score done')
-    selfScore2 = Compare(proj2,proj2)
+    selfScore2 = Compare2(proj2,proj2)
     print('self2 score done')
 
     similarity = 2*compareScore/(selfScore1+selfScore2)

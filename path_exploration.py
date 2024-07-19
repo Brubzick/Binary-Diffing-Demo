@@ -50,7 +50,7 @@ def PathExplore(cfg, path):
         cNode = gNode.node
         # add a row
         gTable.append([Score(None,None,0)]*(pLength+1))
-
+        score = 0
         for col_num in range(1, pLength+1):
             simScore = 0
             if ((len(cNode.predecessors) == len(path[col_num-1].predecessors)) & (len(cNode.successors) == len(path[col_num-1].successors))):
